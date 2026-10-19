@@ -1,0 +1,135 @@
+<!doctype html>
+<html
+  lang="en"
+  data-theme-mode="light"
+  data-theme-preset="default"
+  data-content-layout="centered"
+  data-navbar-style="sticky"
+  data-sidebar-variant="sidebar"
+  data-sidebar-collapsible="icon"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>Studio Admin: Open Source Admin Dashboard with shadcn/ui</title>
+    <meta
+      name="description"
+      content="A polished open source shadcn/ui admin dashboard with 25+ screens and editions for Radix UI, Base UI, React Aria, and TanStack Start."
+    />
+    <meta name="theme-color" content="#ffffff" />
+
+    <!-- Single self-hosted face: Plus Jakarta Sans, latin subset, preloaded. -->
+    <link rel="preload" href="/fonts/plus-jakarta-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
+
+    <!--
+      Boot script: reads the persisted preferences and applies them to <html>
+      before first paint, so the theme/preset/layout never flash. Mirrors
+      src/scripts/theme-boot.tsx from the reference (cookie persistence).
+    -->
+    <script>
+      (function () {
+        try {
+          var root = document.documentElement;
+          var REGISTRY = {
+            theme_mode: {
+              values: ["light", "dark", "system"],
+              defaultValue: "light",
+              persistence: "client-cookie",
+              attribute: "data-theme-mode",
+            },
+            theme_preset: {
+              values: ["default", "brutalist", "soft-pop", "tangerine"],
+              defaultValue: "default",
+              persistence: "client-cookie",
+              attribute: "data-theme-preset",
+            },
+            content_layout: {
+              values: ["centered", "full-width"],
+              defaultValue: "centered",
+              persistence: "client-cookie",
+              attribute: "data-content-layout",
+            },
+            navbar_style: {
+              values: ["sticky", "scroll"],
+              defaultValue: "sticky",
+              persistence: "client-cookie",
+              attribute: "data-navbar-style",
+            },
+            sidebar_variant: {
+              values: ["sidebar", "inset", "floating"],
+              defaultValue: "sidebar",
+              persistence: "client-cookie",
+              attribute: "data-sidebar-variant",
+            },
+            sidebar_collapsible: {
+              values: ["icon", "offcanvas"],
+              defaultValue: "icon",
+              persistence: "client-cookie",
+              attribute: "data-sidebar-collapsible",
+            },
+          };
+
+          function readCookie(name) {
+            var match = document.cookie.split("; ").find(function (c) {
+              return c.startsWith(name + "=");
+            });
+            return match ? decodeURIComponent(match.split("=")[1]) : null;
+          }
+
+          function readLocal(name) {
+            try {
+              return window.localStorage.getItem(name);
+            } catch (e) {
+              return null;
+            }
+          }
+
+          function readPreference(key, definition) {
+            var mode = definition.persistence;
+            var value = null;
+
+            if (mode === "localStorage") {
+              value = readLocal(key);
+            }
+
+            if (!value && (mode === "client-cookie" || mode === "server-cookie")) {
+              value = readCookie(key);
+            }
+
+            return definition.values.indexOf(value) >= 0 ? value : definition.defaultValue;
+          }
+
+          var preferences = {};
+
+          Object.keys(REGISTRY).forEach(function (key) {
+            var definition = REGISTRY[key];
+            var value = readPreference(key, definition);
+
+            preferences[key] = value;
+            root.setAttribute(definition.attribute, value);
+          });
+
+          var mode = preferences.theme_mode;
+          var resolvedMode =
+            mode === "system" && window.matchMedia
+              ? window.matchMedia("(prefers-color-scheme: dark)").matches
+                ? "dark"
+                : "light"
+              : mode === "dark"
+                ? "dark"
+                : "light";
+
+          root.classList.toggle("dark", resolvedMode === "dark");
+          root.style.colorScheme = resolvedMode;
+        } catch (e) {
+          console.warn("ThemeBootScript error:", e);
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
