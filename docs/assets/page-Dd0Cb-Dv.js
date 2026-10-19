@@ -1,1 +1,0 @@
-import{n as e}from"./index-5cTckgYM.js";function t(){e(`/dashboard/default`)}export{t as default};

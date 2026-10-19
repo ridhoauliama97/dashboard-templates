@@ -1,0 +1,1 @@
+import{t as e}from"./index-Dq01kVU1.js";function t(){e()}export{t as default};
