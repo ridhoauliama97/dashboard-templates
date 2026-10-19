@@ -1,0 +1,1 @@
+import{o as e}from"./format-q00TMnea.js";function t(t,n,r){let[i,a]=e(r?.in,t,n),o=i.getFullYear()-a.getFullYear(),s=i.getMonth()-a.getMonth();return o*12+s}export{t};

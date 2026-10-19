@@ -1,0 +1,1 @@
+var e={robots:{index:!1,follow:!0}};function t({children:e}){return e}export{t as default,e as metadata};

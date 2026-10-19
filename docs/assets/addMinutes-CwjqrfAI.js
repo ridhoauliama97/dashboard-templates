@@ -1,0 +1,1 @@
+import{C as e,y as t}from"./protectedTokens-BLSZzxcY.js";function n(n,r,i){let a=t(n,i?.in);return a.setTime(a.getTime()+r*e),a}export{n as t};

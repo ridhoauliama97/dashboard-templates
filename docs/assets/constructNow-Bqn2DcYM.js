@@ -1,0 +1,1 @@
+import{b as e}from"./protectedTokens-BLSZzxcY.js";function t(t){return e(t,Date.now())}export{t};

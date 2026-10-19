@@ -1,0 +1,1 @@
+import{t as e}from"./endOfDay-DyCRsHwo.js";function t(t){return e(Date.now(),t)}export{t};

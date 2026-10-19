@@ -1,0 +1,1 @@
+import{b as e,y as t}from"./protectedTokens-BLSZzxcY.js";function n(n,r){let i=t(n,r?.in),a=i.getFullYear(),o=i.getMonth(),s=e(i,0);return s.setFullYear(a,o+1,0),s.setHours(0,0,0,0),s.getDate()}function r(r,i,a){let o=t(r,a?.in),s=o.getFullYear(),c=o.getDate(),l=e(a?.in||r,0);l.setFullYear(s,i,15),l.setHours(0,0,0,0);let u=n(l);return o.setMonth(i,Math.min(c,u)),o}export{r as t};
